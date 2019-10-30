@@ -15,8 +15,21 @@ class Activity
 
   def total_cost
     @participants.values.sum
-    # @participants.each do |participant|
+  end
+
+  def split
+    total_participants = @participants.size
+    total_cost / total_participants
+  end
+
+  def owed
+    # @participants.map do |key, value|
     #   binding.pry
     # end
+    result = @participants.reduce({}) do |acc, (key, val)|
+      update = split - val
+      acc[key] = update
+      acc
+    end
   end
 end
